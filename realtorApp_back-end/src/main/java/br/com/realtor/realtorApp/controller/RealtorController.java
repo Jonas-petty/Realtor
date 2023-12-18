@@ -4,6 +4,7 @@ import br.com.realtor.realtorApp.entity.realtor.RealtorDetailsData;
 import br.com.realtor.realtorApp.entity.realtor.NewRealtorData;
 import br.com.realtor.realtorApp.entity.realtor.Realtor;
 import br.com.realtor.realtorApp.repository.RealtorRepository;
+import br.com.realtor.realtorApp.util.RealtorManager;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,14 +21,13 @@ public class RealtorController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity post(@RequestBody @Valid NewRealtorData data, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity post(@RequestBody @Valid NewRealtorData data, UriComponentsBuilder uriBuilder) throws Exception {
         var realtor = new Realtor(data);
 
         repository.save(realtor);
 
         var uri = uriBuilder.path("/realtor/{id}").buildAndExpand(realtor.getId()).toUri();
 
-        //  Change return of realtor to a Record object, for better security - TODO
         return ResponseEntity.created(uri).body(new RealtorDetailsData(realtor));
     }
 

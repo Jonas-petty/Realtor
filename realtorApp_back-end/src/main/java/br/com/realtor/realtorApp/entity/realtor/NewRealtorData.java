@@ -7,6 +7,8 @@ import jakarta.validation.constraints.Pattern;
 public record NewRealtorData(
         @NotBlank
         String name,
+
+        String imageURL,
         @NotBlank @Email
         String email,
         @NotBlank @Pattern(regexp = "\\d{9}")

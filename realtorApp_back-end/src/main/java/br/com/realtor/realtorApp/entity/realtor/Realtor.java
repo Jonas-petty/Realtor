@@ -18,6 +18,7 @@ public class Realtor {
     private Long id;
 
     // A profile picture maybe? URL/file - TODO
+    private String imageURL;
 
     private String name;
     private String email;
@@ -31,6 +32,7 @@ public class Realtor {
 
     public Realtor(NewRealtorData data) {
         this.name = data.name();
+        this.imageURL = data.imageURL();
         this.email = data.email();
         this.phoneNumber = data.phoneNumber();
         this.isActive = true;
