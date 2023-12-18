@@ -1,5 +1,6 @@
 package br.com.realtor.realtorApp.controller;
 
+import br.com.realtor.realtorApp.entity.realtor.RealtorDetailsData;
 import br.com.realtor.realtorApp.entity.realtor.NewRealtorData;
 import br.com.realtor.realtorApp.entity.realtor.Realtor;
 import br.com.realtor.realtorApp.repository.RealtorRepository;
@@ -27,7 +28,7 @@ public class RealtorController {
         var uri = uriBuilder.path("/realtor/{id}").buildAndExpand(realtor.getId()).toUri();
 
         //  Change return of realtor to a Record object, for better security - TODO
-        return ResponseEntity.created(uri).body(realtor);
+        return ResponseEntity.created(uri).body(new RealtorDetailsData(realtor));
     }
 
 }
