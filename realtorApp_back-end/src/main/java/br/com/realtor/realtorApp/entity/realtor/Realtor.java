@@ -20,14 +20,13 @@ public class Realtor {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // A profile picture maybe? URL/file - TODO
     private String imageURL;
 
     private String name;
     private String email;
     private String phoneNumber;
 
-    // A List of Houses maybe??? List<House> houses - TODO
+    // A List of Houses maybe??? List<Residence> houses - TODO
 
     private Boolean isActive;
     @CreationTimestamp
