@@ -16,9 +16,12 @@ public class RealtorManager {
 
 
     // The code basic functionality works just fine, however it still needs to be refactored - TODO
+    /**
+    * Saves the profile picture of a Realtor to a file
+     *  @author Jonas Felix
+    */
     public void saveProfilePicture(Realtor realtor) throws Exception {
         String imageURL = realtor.getImageURL();
-//        String destinationFile = ".\\testes.jpg";
 
         URL url = new URL(imageURL);
         BufferedImage image = ImageIO.read(url);
