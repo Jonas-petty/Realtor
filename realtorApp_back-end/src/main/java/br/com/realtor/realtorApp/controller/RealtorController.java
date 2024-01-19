@@ -3,6 +3,7 @@ package br.com.realtor.realtorApp.controller;
 import br.com.realtor.realtorApp.entity.realtor.RealtorDetailsData;
 import br.com.realtor.realtorApp.entity.realtor.NewRealtorData;
 import br.com.realtor.realtorApp.entity.realtor.Realtor;
+import br.com.realtor.realtorApp.entity.realtor.UpdateRealtorData;
 import br.com.realtor.realtorApp.repository.RealtorRepository;
 import br.com.realtor.realtorApp.util.RealtorManager;
 import jakarta.validation.Valid;
@@ -21,13 +22,6 @@ public class RealtorController {
     @Autowired
     private RealtorRepository repository;
 
-
-    /**
-     * Add a new Realtor to the system
-     * @param data
-     * @param uriBuilder
-     * @return ResponseEntity
-     */
     @PostMapping
     @Transactional
     public ResponseEntity post(@RequestBody @Valid NewRealtorData data, UriComponentsBuilder uriBuilder) {
@@ -44,6 +38,15 @@ public class RealtorController {
     public ResponseEntity<Page<RealtorDetailsData>> list(Pageable pageable) {
         var page = repository.findAllByIsActiveTrue(pageable).map(RealtorDetailsData::new);
         return ResponseEntity.ok(page);
+    }
+
+    @PutMapping
+    @Transactional
+    public ResponseEntity update(@RequestBody @Valid UpdateRealtorData data) {
+        Realtor realtor = repository.getReferenceById(data.id());
+        realtor.updateInfo(data);
+
+        return ResponseEntity.ok(new RealtorDetailsData(realtor));
     }
 
 }

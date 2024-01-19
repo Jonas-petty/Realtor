@@ -39,4 +39,19 @@ public class Realtor {
         this.phoneNumber = data.phoneNumber();
         this.isActive = true;
     }
+
+    public void updateInfo(UpdateRealtorData data) {
+        if (data.imageURL() != null) {
+            this.imageURL = data.imageURL();
+        }
+        if (data.name() != null) {
+            this.name = data.name();
+        }
+        if (data.email() != null) {
+            this.email = data.email();
+        }
+        if (data.phoneNumber() != null) {
+            this.phoneNumber = data.phoneNumber();
+        }
+    }
 }
