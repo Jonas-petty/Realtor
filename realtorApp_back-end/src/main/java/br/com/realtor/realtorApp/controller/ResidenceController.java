@@ -2,6 +2,7 @@ package br.com.realtor.realtorApp.controller;
 
 import br.com.realtor.realtorApp.entity.residence.NewResidenceData;
 import br.com.realtor.realtorApp.entity.residence.ResidenceManager;
+import br.com.realtor.realtorApp.entity.residence.ResidenceType;
 import br.com.realtor.realtorApp.repository.ResidenceRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -40,6 +41,11 @@ public class ResidenceController {
         residence.delete();
 
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/type")
+    public ResponseEntity listResidenceTypes() {
+        return ResponseEntity.ok(ResidenceType.values());
     }
 
 
