@@ -34,4 +34,8 @@ public class Residence {
     private Boolean isActive;
     @CreationTimestamp
     private LocalDateTime createdAt;
+
+    public void delete() {
+        this.isActive = false;
+    }
 }

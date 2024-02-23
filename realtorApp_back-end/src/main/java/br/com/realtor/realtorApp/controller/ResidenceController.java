@@ -7,10 +7,7 @@ import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
@@ -33,6 +30,17 @@ public class ResidenceController {
 
         return ResponseEntity.created(uri).body(createdResidenceDetails);
 
+    }
+
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity delete(@PathVariable Long id) {
+        var residence = repository.getReferenceById(id);
+
+        residence.delete();
+
+        return ResponseEntity.noContent().build();
     }
 
 
