@@ -7,6 +7,7 @@ import br.com.realtor.realtorApp.entity.realtor.UpdateRealtorData;
 import br.com.realtor.realtorApp.repository.RealtorRepository;
 import br.com.realtor.realtorApp.util.RealtorManager;
 import jakarta.validation.Valid;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -48,5 +49,16 @@ public class RealtorController {
 
         return ResponseEntity.ok(new RealtorDetailsData(realtor));
     }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public ResponseEntity delete(@PathVariable Long id) {
+        var realtor = repository.getReferenceById(id);
+
+        realtor.delete();
+
+        return ResponseEntity.noContent().build();
+    }
+
 
 }

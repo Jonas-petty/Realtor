@@ -32,5 +32,8 @@ public class ResidenceController {
         var uri = uriBuilder.path("/repair/{id}").buildAndExpand(createdResidenceDetails.id()).toUri();
 
         return ResponseEntity.created(uri).body(createdResidenceDetails);
+
     }
+
+
 }
