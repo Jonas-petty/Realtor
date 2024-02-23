@@ -1,6 +1,6 @@
 package br.com.realtor.realtorApp.entity.residence;
 
-public enum ResidenceKind {
+public enum ResidenceType {
     HOUSE,
     APARTMENT,
     DORMITORY,

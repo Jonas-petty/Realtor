@@ -24,7 +24,7 @@ public class Residence {
     private String CEP;
 
     @Enumerated(EnumType.STRING)
-    private ResidenceKind residenceKind;
+    private ResidenceType residenceType;
 
     private String address;
     private String addressComplement;

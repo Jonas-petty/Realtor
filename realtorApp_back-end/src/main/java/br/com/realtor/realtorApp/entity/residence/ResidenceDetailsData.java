@@ -1,16 +1,12 @@
 package br.com.realtor.realtorApp.entity.residence;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
-
 import java.time.LocalDateTime;
 
 public record ResidenceDetailsData(
 
         Long id,
         String CEP,
-        ResidenceKind residenceKind,
+        ResidenceType residenceType,
         String address,
         String addressComplement,
         Integer totalBedrooms,
@@ -21,7 +17,7 @@ public record ResidenceDetailsData(
         this(
                 residence.getId(),
                 residence.getCEP(),
-                residence.getResidenceKind(),
+                residence.getResidenceType(),
                 residence.getAddress(),
                 residence.getAddressComplement(),
                 residence.getTotalBedrooms(),

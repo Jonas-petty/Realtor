@@ -10,7 +10,7 @@ public record NewResidenceData(
         @NotBlank @Pattern(regexp = "\\d{8}")
         String CEP,
         @NotNull
-        ResidenceKind residenceKind,
+        ResidenceType residenceType,
         @NotBlank
         String address,
         String addressComplement,

@@ -32,7 +32,6 @@ public class ResidenceController {
 
     }
 
-
     @DeleteMapping("/{id}")
     @Transactional
     public ResponseEntity delete(@PathVariable Long id) {
