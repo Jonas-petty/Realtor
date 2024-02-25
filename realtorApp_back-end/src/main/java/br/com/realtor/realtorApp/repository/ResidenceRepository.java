@@ -10,4 +10,6 @@ import java.util.Optional;
 
 public interface ResidenceRepository extends JpaRepository<Residence, Long> {
     Page<Residence> findAllByIsActiveTrue(Pageable pageable);
+
+    Page<Residence> findAllByRealtorId(Long id, Pageable pageable);
 }

@@ -22,8 +22,8 @@ public class ResidenceManager {
         var realtor = realtorRepository.getReferenceById(data.realtorId());
         var residence = new Residence(null, realtor, data.CEP(), data.residenceType(), data.address(),
                 data.addressComplement(), data.totalBedrooms(), data.totalBathrooms(), true, null);
-        residenceRepository.save(residence);
-        residenceRepository.flush();
+        residenceRepository.saveAndFlush(residence);
+//        residenceRepository.flush();
 
         return new ResidenceDetailsData(residence);
     }

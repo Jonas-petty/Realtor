@@ -8,6 +8,7 @@ import br.com.realtor.realtorApp.entity.residence.ResidenceType;
 import br.com.realtor.realtorApp.repository.ResidenceRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -41,6 +42,13 @@ public class ResidenceController {
     @GetMapping
     public ResponseEntity<Page<ResidenceDetailsData>> listAll(Pageable pageable) {
         var page = repository.findAllByIsActiveTrue(pageable).map(ResidenceDetailsData::new);
+        return ResponseEntity.ok(page);
+    }
+
+    // Return all Residences related to a Realtor
+    @GetMapping("/realtor/{id}")
+    public ResponseEntity<Page<ResidenceDetailsData>> listAllByRealtor(@PathVariable Long id, Pageable pageable) {
+        var page = repository.findAllByRealtorId(id, pageable).map(ResidenceDetailsData::new);
         return ResponseEntity.ok(page);
     }
 
