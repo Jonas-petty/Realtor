@@ -1,12 +1,16 @@
 package br.com.realtor.realtorApp.controller;
 
+import br.com.realtor.realtorApp.entity.realtor.RealtorDetailsData;
 import br.com.realtor.realtorApp.entity.residence.NewResidenceData;
+import br.com.realtor.realtorApp.entity.residence.ResidenceDetailsData;
 import br.com.realtor.realtorApp.entity.residence.ResidenceManager;
 import br.com.realtor.realtorApp.entity.residence.ResidenceType;
 import br.com.realtor.realtorApp.repository.ResidenceRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -33,9 +37,12 @@ public class ResidenceController {
         return ResponseEntity.created(uri).body(createdResidenceDetails);
     }
 
-
-
-
+    // Return a pageable JSON with all the active Residences registered on the System
+    @GetMapping
+    public ResponseEntity<Page<ResidenceDetailsData>> listAll(Pageable pageable) {
+        var page = repository.findAllByIsActiveTrue(pageable).map(ResidenceDetailsData::new);
+        return ResponseEntity.ok(page);
+    }
 
     // Delete a Residence by its ID
     @DeleteMapping("/{id}")
