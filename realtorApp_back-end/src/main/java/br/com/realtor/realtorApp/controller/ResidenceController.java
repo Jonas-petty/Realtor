@@ -21,6 +21,7 @@ public class ResidenceController {
     @Autowired
     private ResidenceManager residenceManager;
 
+    // Post a new Residence to the system
     @PostMapping
     @Transactional
     public ResponseEntity create(@RequestBody @Valid NewResidenceData newResidence, UriComponentsBuilder uriBuilder) {
@@ -30,9 +31,13 @@ public class ResidenceController {
         var uri = uriBuilder.path("/repair/{id}").buildAndExpand(createdResidenceDetails.id()).toUri();
 
         return ResponseEntity.created(uri).body(createdResidenceDetails);
-
     }
 
+
+
+
+
+    // Delete a Residence by its ID
     @DeleteMapping("/{id}")
     @Transactional
     public ResponseEntity delete(@PathVariable Long id) {
@@ -43,6 +48,7 @@ public class ResidenceController {
         return ResponseEntity.noContent().build();
     }
 
+    // Return a list of all the Residence types considered
     @GetMapping("/type")
     public ResponseEntity listResidenceTypes() {
         return ResponseEntity.ok(ResidenceType.values());

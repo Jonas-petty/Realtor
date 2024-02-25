@@ -23,6 +23,7 @@ public class RealtorController {
     @Autowired
     private RealtorRepository repository;
 
+    // Post a new Realtor do the system
     @PostMapping
     @Transactional
     public ResponseEntity post(@RequestBody @Valid NewRealtorData data, UriComponentsBuilder uriBuilder) {
@@ -35,12 +36,14 @@ public class RealtorController {
         return ResponseEntity.created(uri).body(new RealtorDetailsData(realtor));
     }
 
+    // Return a pageable JSON with all active Realtors registered on the system
     @GetMapping
     public ResponseEntity<Page<RealtorDetailsData>> list(Pageable pageable) {
         var page = repository.findAllByIsActiveTrue(pageable).map(RealtorDetailsData::new);
         return ResponseEntity.ok(page);
     }
 
+    // Update a Realtor's data
     @PutMapping
     @Transactional
     public ResponseEntity update(@RequestBody @Valid UpdateRealtorData data) {
@@ -50,6 +53,7 @@ public class RealtorController {
         return ResponseEntity.ok(new RealtorDetailsData(realtor));
     }
 
+    // Delete a Realtor by its ID
     @DeleteMapping("/{id}")
     @Transactional
     public ResponseEntity delete(@PathVariable Long id) {
