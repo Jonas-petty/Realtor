@@ -43,6 +43,18 @@ public class RealtorController {
         return ResponseEntity.ok(page);
     }
 
+    // Return a Realtor by its ID
+    @GetMapping("/{id}")
+    public ResponseEntity getById(@PathVariable Long id) {
+        if (repository.existsById(id)) {
+            var realtor = repository.getReferenceById(id);
+            return ResponseEntity.ok(new RealtorDetailsData(realtor));
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
     // Update a Realtor's data
     @PutMapping
     @Transactional
