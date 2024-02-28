@@ -1,11 +1,11 @@
 # Realtor Platform
 
-A plataform where realtors can display all the properties they have available to their clients.
+A platform where realtors can display all the properties they have available to their clients.
 
 ## How to run:
 
 1. Clone the Project locally
-2. Run the Back-end project using a IDE
+2. Run the Back-end project using an IDE
 
 ## Paths working:
 
