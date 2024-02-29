@@ -54,7 +54,6 @@ public class RealtorController {
         }
     }
 
-
     // Update a Realtor's data
     @PutMapping
     @Transactional
@@ -75,6 +74,4 @@ public class RealtorController {
 
         return ResponseEntity.noContent().build();
     }
-
-
 }

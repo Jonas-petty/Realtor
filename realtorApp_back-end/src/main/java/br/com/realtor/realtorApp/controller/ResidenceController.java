@@ -45,6 +45,16 @@ public class ResidenceController {
         return ResponseEntity.ok(page);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity getById(@PathVariable Long id) {
+        if (repository.existsById(id)) {
+            var residence = repository.getReferenceById(id);
+            return ResponseEntity.ok(new ResidenceDetailsData(residence));
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     // Return all Residences related to a Realtor
     @GetMapping("/realtor/{id}")
     public ResponseEntity<Page<ResidenceDetailsData>> listAllByRealtor(@PathVariable Long id, Pageable pageable) {
