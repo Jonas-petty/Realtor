@@ -1,10 +1,7 @@
 package br.com.realtor.realtorApp.controller;
 
 import br.com.realtor.realtorApp.entity.realtor.RealtorDetailsData;
-import br.com.realtor.realtorApp.entity.residence.NewResidenceData;
-import br.com.realtor.realtorApp.entity.residence.ResidenceDetailsData;
-import br.com.realtor.realtorApp.entity.residence.ResidenceManager;
-import br.com.realtor.realtorApp.entity.residence.ResidenceType;
+import br.com.realtor.realtorApp.entity.residence.*;
 import br.com.realtor.realtorApp.repository.ResidenceRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -29,7 +26,7 @@ public class ResidenceController {
     // Post a new Residence to the system
     @PostMapping
     @Transactional
-    public ResponseEntity create(@RequestBody @Valid NewResidenceData newResidence, UriComponentsBuilder uriBuilder) {
+    public ResponseEntity post(@RequestBody @Valid NewResidenceData newResidence, UriComponentsBuilder uriBuilder) {
         var createdResidenceDetails = residenceManager.create(newResidence);
         repository.flush();
 
@@ -40,7 +37,7 @@ public class ResidenceController {
 
     // Return a pageable JSON with all the active Residences registered on the System
     @GetMapping
-    public ResponseEntity<Page<ResidenceDetailsData>> listAll(Pageable pageable) {
+    public ResponseEntity<Page<ResidenceDetailsData>> list(Pageable pageable) {
         var page = repository.findAllByIsActiveTrue(pageable).map(ResidenceDetailsData::new);
         return ResponseEntity.ok(page);
     }
@@ -62,6 +59,16 @@ public class ResidenceController {
         return ResponseEntity.ok(page);
     }
 
+    //Update a Residence's data
+    @PutMapping
+    @Transactional
+    public ResponseEntity update(@RequestBody @Valid UpdateResidenceData data) {
+        var residence = repository.getReferenceById(data.id());
+        residence.updateInfo(data);
+
+        return ResponseEntity.ok(new ResidenceDetailsData(residence));
+    }
+
     // Delete a Residence by its ID
     @DeleteMapping("/{id}")
     @Transactional
@@ -78,6 +85,4 @@ public class ResidenceController {
     public ResponseEntity listResidenceTypes() {
         return ResponseEntity.ok(ResidenceType.values());
     }
-
-
 }

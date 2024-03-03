@@ -38,4 +38,25 @@ public class Residence {
     public void delete() {
         this.isActive = false;
     }
+
+    public void updateInfo(UpdateResidenceData data) {
+        if (data.CEP() != null) {
+            this.CEP = data.CEP();
+        }
+        if (data.residenceType() != null) {
+            this.residenceType = data.residenceType();
+        }
+        if (data.address() != null) {
+            this.address = data.address();
+        }
+        if (data.addressComplement() != null) {
+            this.addressComplement = data.addressComplement();
+        }
+        if (data.totalBedrooms() != null) {
+            this.totalBedrooms = data.totalBedrooms();
+        }
+        if (data.totalBathrooms() != null) {
+            this.totalBathrooms = data.totalBathrooms();
+        }
+    }
 }
